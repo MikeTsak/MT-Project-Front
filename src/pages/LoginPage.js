@@ -13,14 +13,6 @@ export default function LoginPage() {
     e.preventDefault();
     setError('');
 
-const symbols = ['+', '-', '=', '%', '€', '×', '÷', '≈', '∑', 'π'];
-const floatingElements = Array.from({ length: 20 }, () => ({
-  symbol: symbols[Math.floor(Math.random() * symbols.length)],
-  left: Math.random() * 100,
-  delay: Math.random() * 20,
-  duration: 10 + Math.random() * 20,
-}));
-
 
     try {
       console.log('📡 Αποστολή αιτήματος σύνδεσης...');

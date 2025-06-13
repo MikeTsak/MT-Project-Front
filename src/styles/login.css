@@ -6,13 +6,14 @@ body {
   background-color: #51677c;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   height: 100vh;
-  background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23cbd5e0' fill-opacity='0.3'%3E%3Ctext x='10' y='20' font-size='20'%3E%2B%3C/text%3E%3Ctext x='60' y='40' font-size='20'%3E-%3C/text%3E%3Ctext x='30' y='70' font-size='20'%3E%3D%3C/text%3E%3Ctext x='90' y='90' font-size='20'%3E%C3%97%3C/text%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23cbd5e0' fill-opacity='0.3'%3E%3Ctext x='10' y='20' font-size='20'%3E%2B%3C/text%3E%3Ctext x='60' y='40' font-size='20'%3E-%3C/text%3E%3Ctext x='30' y='70' font-size='20'%3E%3D%3C/text%3E%3Ctext x='90' y='90' font-size='20'%3E%C3%97%3C/text%3E%3Ctext x='15' y='100' font-size='20'%3E%25%3C/text%3E%3Ctext x='80' y='15' font-size='20'%3E%E2%82%AC%3C/text%3E%3C/g%3E%3C/svg%3E");
   background-size: 80px 80px;
   animation: float-bg 30s linear infinite;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 
 @keyframes float-bg {
   0% {
