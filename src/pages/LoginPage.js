@@ -41,6 +41,7 @@ export default function LoginPage() {
   };
 
   return (
+      <div className="login-wrapper">
     <form className="login-container" onSubmit={handleLogin}>
       <div className="login-title">📊 Σύνδεση Λογιστή</div>
       {error && <div className="error-text">{error}</div>}
@@ -64,5 +65,6 @@ export default function LoginPage() {
         ➡️ Είσοδος
       </button>
     </form>
+    </div>
   );
 }
