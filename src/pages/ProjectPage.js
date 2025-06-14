@@ -5,6 +5,7 @@ import TaskList from '../components/TaskList';
 import ChatBox from '../components/ChatBox';
 import { API_BASE_URL } from '../config';
 import '../styles/ProjectPage.css';
+import AccountingLoader from '../components/AccountingLoader';
 
 export default function ProjectPage() {
   const { project_id } = useParams();
@@ -109,7 +110,7 @@ export default function ProjectPage() {
 
       <div className="project-wrapper">
         {error && <p>{error}</p>}
-        {!error && !project && <p>Φόρτωση...</p>}
+        {!error && !project && <p> <AccountingLoader /></p>}
 
         {project && (
           <>

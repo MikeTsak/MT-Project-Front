@@ -1,0 +1,133 @@
+/* overall wrapper */
+.chat-wrapper {
+  margin-top: 1rem;
+}
+
+/* chat messages window */
+.chat-window {
+  background: #2d3748;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+/* each message row */
+.msg-row {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 0.5rem;
+}
+.msg-row.mine {
+  justify-content: flex-end;
+}
+
+/* bubble */
+.msg-bubble {
+  background: #4a5568;      /* default (others) */
+  color: #fff;
+  padding: 0.5rem 0.75rem;
+  border-radius: 12px;
+  max-width: 70%;
+  position: relative;
+}
+.msg-bubble.mine {
+  background: #4c51bf;
+}
+
+/* user label */
+.msg-user {
+  font-weight: bold;
+}
+
+/* timestamp */
+.msg-timestamp {
+  font-size: 0.7rem;
+  color: #cbd5e0;
+  margin-top: 0.2rem;
+}
+
+/* quick-edit input */
+.msg-edit-input {
+  width: 100%;
+  padding: 0.3rem;
+  margin-top: 0.3rem;
+  border: 1px solid #d69e2e;
+  border-radius: 4px;
+}
+
+/* edit button group */
+.edit-btn-group {
+  margin-top: 0.3rem;
+}
+
+/* actions (edit / delete) */
+.bubble-actions {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}
+.bubble-actions button {
+  margin-right: 0.3rem;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* input row */
+.chat-input-group {
+  display: flex;
+  margin-top: 1rem;
+  gap: 0.5rem;
+}
+.chat-input {
+  flex-grow: 1;
+  padding: 0.5rem;
+}
+.chat-send-btn {
+  background: #4c51bf;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+/* modal */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.modal-box {
+  background: #2d3748;
+  color: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 400px;
+  text-align: center;
+}
+.modal-btn-row {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+.modal-btn-confirm {
+  background: #e53e3e;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+.modal-btn-cancel {
+  background: #4a5568;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}

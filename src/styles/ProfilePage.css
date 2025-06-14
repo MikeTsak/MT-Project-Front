@@ -1,0 +1,38 @@
+.profile-page {
+  max-width: 600px;
+  margin: 6rem auto;
+  padding: 2rem;
+  background: #1a202c;
+  border-radius: 12px;
+  color: #e2e8f0;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.profile-info p {
+  margin-bottom: 0.8rem;
+}
+
+.profile-edit input,
+.profile-edit select,
+.password-change input {
+  display: block;
+  width: 100%;
+  padding: 0.6rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  border: none;
+}
+
+button {
+  margin-right: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #4c51bf;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #5a61d6;
+}

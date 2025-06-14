@@ -2,8 +2,9 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
 import ProjectPage from './pages/ProjectPage';
-import PrivateRoute from './PrivateRoute';
 import EditProjectPage from './pages/EditProjectPage';
+import ProfilePage from './pages/ProfilePage'; // ✅ Import this
+import PrivateRoute from './PrivateRoute';
 
 export default function App() {
   return (
@@ -24,6 +25,14 @@ export default function App() {
           element={
             <PrivateRoute>
               <ProjectPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/profile" // ✅ Add this route
+          element={
+            <PrivateRoute>
+              <ProfilePage />
             </PrivateRoute>
           }
         />
