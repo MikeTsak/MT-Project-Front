@@ -3,12 +3,14 @@ import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
 import ProjectPage from './pages/ProjectPage';
 import PrivateRoute from './PrivateRoute';
+import EditProjectPage from './pages/EditProjectPage';
 
 export default function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<LoginPage />} />
+        <Route path="/edit/:project_id" element={<EditProjectPage />} />
         <Route
           path="/home"
           element={

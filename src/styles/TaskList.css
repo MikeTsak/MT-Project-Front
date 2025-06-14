@@ -1,0 +1,39 @@
+.task-section {
+  margin-top: 2rem;
+  background: #2d3748;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.task-create {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.task-create input {
+  flex: 1;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #a0aec0;
+}
+
+.task-item {
+  background: #4a5568;
+  color: #edf2f7;
+  padding: 0.5rem;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-item.done {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.task-actions button {
+  margin-left: 0.4rem;
+}
