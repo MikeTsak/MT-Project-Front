@@ -8,10 +8,11 @@ export default function ChatBox({ projectId }) {
   const [editingId, setEditingId] = useState(null);
   const [editingText, setEditingText] = useState('');
   const [myUsername, setMyUsername] = useState('');
+  const [pushEnabled, setPushEnabled] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [deleteTargetId, setDeleteTargetId] = useState(null);
 
-  /* ───────────────────────── Load chat & username ───────────────────────── */
+  // ──────────────────────── Setup & Load Chat ────────────────────────
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) return;
@@ -20,7 +21,7 @@ export default function ChatBox({ projectId }) {
       const payload = JSON.parse(atob(token.split('.')[1]));
       setMyUsername(payload.username);
     } catch (err) {
-      console.error('❌ Error decoding token:', err);
+      console.error('❌ Token decode error:', err);
     }
 
     fetch(`${API_BASE_URL}/projects/${projectId}/chat`, {
@@ -30,7 +31,51 @@ export default function ChatBox({ projectId }) {
       .then(d => d.success && setChat(d.chat));
   }, [projectId]);
 
-  /* ───────────────────────── Helpers ───────────────────────── */
+  useEffect(() => {
+    if (pushEnabled) subscribeToPush();
+  }, [pushEnabled]);
+
+  // ──────────────────────── Push Notification Logic ────────────────────────
+  const subscribeToPush = async () => {
+    try {
+      const registration = await navigator.serviceWorker.ready;
+      const subscription = await registration.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: process.env.REACT_APP_VAPID_PUBLIC_KEY
+      });
+
+      await fetch(`${API_BASE_URL}/user/subscribe`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify({
+          project_id: projectId,
+          endpoint: subscription.endpoint,
+          keys: subscription.toJSON().keys
+        })
+      });
+
+      console.log('🔔 Push subscription successful');
+    } catch (err) {
+      console.error('❌ Push subscription failed:', err);
+    }
+  };
+
+  const testNotification = async () => {
+    await fetch(`${API_BASE_URL}/user/notify-test`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      },
+      body: JSON.stringify({ project_id: projectId })
+    });
+    alert('🚀 Test notification sent');
+  };
+
+  // ──────────────────────── Chat Functions ────────────────────────
   const sendMessage = () => {
     const token = localStorage.getItem('token');
     if (!newMessage.trim()) return;
@@ -62,10 +107,7 @@ export default function ChatBox({ projectId }) {
 
   const updateMessage = () => {
     const token = localStorage.getItem('token');
-    if (!editingId || !editingText.trim()) {
-      console.warn('⚠️ Missing editing ID or text');
-      return;
-    }
+    if (!editingId || !editingText.trim()) return;
 
     fetch(`${API_BASE_URL}/projects/${projectId}/chat/${editingId}`, {
       method: 'PUT',
@@ -90,21 +132,12 @@ export default function ChatBox({ projectId }) {
   };
 
   const confirmDelete = (id) => {
-    if (!id) {
-      console.warn('⚠️ Cannot delete: message ID is undefined');
-      return;
-    }
     setDeleteTargetId(id);
     setShowDeleteConfirm(true);
   };
 
   const deleteMessage = () => {
     const token = localStorage.getItem('token');
-    if (!deleteTargetId) {
-      console.warn('⚠️ No message selected for deletion');
-      return;
-    }
-
     fetch(`${API_BASE_URL}/projects/${projectId}/chat/${deleteTargetId}`, {
       method: 'DELETE',
       headers: { Authorization: `Bearer ${token}` }
@@ -130,10 +163,22 @@ export default function ChatBox({ projectId }) {
     }
   };
 
-  /* ───────────────────────── Render ───────────────────────── */
+  // ──────────────────────── Render ────────────────────────
   return (
     <div className="chat-wrapper">
       <h3>💬 Συζήτηση έργου</h3>
+
+      <div className="push-controls">
+        <label>
+          <input
+            type="checkbox"
+            checked={pushEnabled}
+            onChange={() => setPushEnabled(!pushEnabled)}
+          />
+          🔔 Push Notifications
+        </label>
+        <button onClick={testNotification}>📤 Send Test</button>
+      </div>
 
       <div className="chat-window">
         {chat.map((msg) => {
@@ -166,13 +211,7 @@ export default function ChatBox({ projectId }) {
                     </div>
                     {isMine && (
                       <div className="bubble-actions">
-                        <button
-                          onClick={() => {
-                            if (!msg.id) return console.warn('⚠️ Invalid message ID for edit');
-                            setEditingId(msg.id);
-                            setEditingText(msg.message);
-                          }}
-                        >
+                        <button onClick={() => { setEditingId(msg.id); setEditingText(msg.message); }}>
                           ✏️
                         </button>
                         <button onClick={() => confirmDelete(msg.id)}>🗑️</button>

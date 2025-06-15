@@ -118,7 +118,18 @@ export default function ProjectPage() {
             <p>📝 {project.description}</p>
             <p>🗓️ Προθεσμία: {new Date(project.deadline).toLocaleDateString()}</p>
             <p>👤 Δημιουργός: {project.created_by}</p>
-            <p>👥 Ανατεθειμένοι: {project.assignees.join(', ')}</p>
+            <p>👥 Ανατεθειμένοι: {
+              project.assignees.map((username, i) => (
+                <span
+                  key={username}
+                  style={{ color: '#63b3ed', cursor: 'pointer', textDecoration: 'underline', marginRight: '0.5rem' }}
+                  onClick={() => navigate(`/user-projects/${username}`)}
+                >
+                  {username}{i < project.assignees.length - 1 ? ',' : ''}
+                </span>
+              ))
+            }</p>
+
 
             {renderProgressBar()}
             <TaskList projectId={project.project_id} />

@@ -3,8 +3,10 @@ import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
 import ProjectPage from './pages/ProjectPage';
 import EditProjectPage from './pages/EditProjectPage';
-import ProfilePage from './pages/ProfilePage'; // ✅ Import this
+import ProfilePage from './pages/ProfilePage'; 
 import PrivateRoute from './PrivateRoute';
+import UserProjectsPage from './pages/UserProjectsPage';
+import NotFound from './pages/NotFound';
 
 export default function App() {
   return (
@@ -29,6 +31,14 @@ export default function App() {
           }
         />
         <Route
+          path="/user-projects/:username"
+          element={
+            <PrivateRoute>
+              <UserProjectsPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
           path="/profile" // ✅ Add this route
           element={
             <PrivateRoute>
@@ -37,6 +47,7 @@ export default function App() {
           }
         />
         <Route path="*" element={<Navigate to="/" />} />
+        <Route path="/projects/welcome-tasky" element={<NotFound />} />
       </Routes>
     </Router>
   );
