@@ -170,14 +170,15 @@ export default function ChatBox({ projectId }) {
 
       <div className="push-controls">
         <label>
+          {/*
           <input
             type="checkbox"
             checked={pushEnabled}
             onChange={() => setPushEnabled(!pushEnabled)}
           />
-          🔔 Push Notifications
+           🔔 Push Notifications */}
         </label>
-        <button onClick={testNotification}>📤 Send Test</button>
+        {/* <button onClick={testNotification}>📤 Send Test</button> */}
       </div>
 
       <div className="chat-window">

@@ -7,6 +7,10 @@ import ProfilePage from './pages/ProfilePage';
 import PrivateRoute from './PrivateRoute';
 import UserProjectsPage from './pages/UserProjectsPage';
 import NotFound from './pages/NotFound';
+import Footer from './components/Footer';
+
+
+
 
 export default function App() {
   return (
@@ -46,9 +50,10 @@ export default function App() {
             </PrivateRoute>
           }
         />
-        <Route path="*" element={<Navigate to="/" />} />
+        <Route path="*" element={<Navigate to="/home" />} />
         <Route path="/projects/welcome-tasky" element={<NotFound />} />
       </Routes>
+      <Footer />
     </Router>
   );
 }

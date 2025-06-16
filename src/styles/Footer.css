@@ -1,0 +1,30 @@
+/* src/styles/Footer.css */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.footer-spacer {
+  min-height: 30vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.sticky-footer {
+  background-color: #1a202c;
+  color: #a0aec0;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.85rem;
+  border-top: 1px solid #2d3748;
+}
+
+.sticky-footer a {
+  color: #63b3ed;
+  text-decoration: none;
+}
+
+.sticky-footer a:hover {
+  text-decoration: underline;
+}
